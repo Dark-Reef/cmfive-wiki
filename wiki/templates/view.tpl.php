@@ -4,20 +4,20 @@
 	<div class="tabs">
 		<div>
 			<div class="tab-head">
-				<a href="#view">View</a>
-				<a href="#wiki-history">Wiki History</a>
-				<a href="#page-history">Page History</a>
+				<a href="#view"><?php _e('View'); ?></a>
+				<a href="#wiki-history"><?php _e('Wiki History'); ?></a>
+				<a href="#page-history"><?php _e('Page History'); ?></a>
 				<?php if ($wiki->canEdit($w->Auth->user())):?>
-					<a href="#edit">Edit</a>
+					<a href="#edit"><?php _e('Edit'); ?></a>
 				<?php endif; ?>
 				<?php if ($wiki->isOwner($w->Auth->user()) && $page->name == "HomePage"):?>
-					<a href="#members">Members</a>
+					<a href="#members"><?php _e('Members'); ?></a>
 				<?php endif; ?>
 				<?php if ($w->Auth->hasRole('comment')):?>
-				<a href="#comments">Comments</a>
+				<a href="#comments"><?php _e('Comments'); ?></a>
 				<?php endif; ?>
 				<?php if ($w->Auth->hasRole('file_upload') && $w->Auth->hasRole('file_download')):?>
-				<a href="#attachments">Attachments</a>
+				<a href="#attachments"><?php _e('Attachments'); ?></a>
 				<?php endif; ?>
 				<?php 
 					$tab_headers= $w->callHook('core_template', 'tab_headers', $page);  
@@ -26,9 +26,9 @@
 					}
 				?>
 				<!--span style="float:right;"><button class="button tiny " onclick="modal_history.push(&quot;/wiki/markup?isbox=1&quot;); $(&quot;#cmfive-modal&quot;).foundation(&quot;reveal&quot;, &quot;open&quot;, &quot;/wiki/markup?isbox=1&quot;);return false;">Markup Help</button></span-->
-				<span id="wikibuttons" style="float:right; display: none;" ><button class="button tiny button savebutton" type="submit">Save</button><button class="button tiny tiny button cancelbutton" style="margin-right: 2em;" type="button" onclick="if($('#cmfive-modal').is(':visible')){ $('#cmfive-modal').foundation('reveal', 'close'); } else { window.history.back(); }">Cancel</button></span>
+				<span id="wikibuttons" style="float:right; display: none;" ><button class="button tiny button savebutton" type="submit"><?php _e('Save'); ?></button><button class="button tiny tiny button cancelbutton" style="margin-right: 2em;" type="button" onclick="if($('#cmfive-modal').is(':visible')){ $('#cmfive-modal').foundation('reveal', 'close'); } else { window.history.back(); }"><?php _e('Cancel'); ?></button></span>
 				
-				<span id="wikiautosavebuttons" style="float:right; display: none;" ><button class="button tiny tiny button savedbutton" disabled="true" type="submit">Saved</button><button class="button tiny tiny button savebutton" disabled="true" type="submit">Saving</button></span>
+				<span id="wikiautosavebuttons" style="float:right; display: none;" ><button class="button tiny tiny button savedbutton" disabled="true" type="submit">Saved</button><button class="button tiny tiny button savebutton" disabled="true" type="submit"><?php _e('Saving'); ?></button></span>
 
 				<?php echo $w->partial('listTags',['object' => $page], 'tag'); ?>
 				<?php echo $w->Favorite->getFavoriteButton($page);?>
@@ -76,7 +76,7 @@
 				
 				$table = array();
 				if (!empty($wiki_hist)){
-						$table[] = array("Date", "Page", "User");
+						$table[] = array(__("Date"), __("Page"), __("User"));
 						foreach($wiki_hist as $wh) {
 							$table[]=array(
 								formatDateTime($wh["dt_created"]),
@@ -86,7 +86,7 @@
 						}
 						echo Html::table($table,"history","tablesorter",true);
 				} else {
-						echo "No changes yet.";
+						echo __("No changes yet.");
 				}
 				?>
 			</div>
@@ -96,17 +96,17 @@
 				<?php 
 				$table = array();
 				if ($page_hist){
-						$table[]=array("Date", "User", "Action");
+						$table[]=array(__("Date"), __("User"), __("Action"));
 						foreach($page_hist as $ph) {
 							$table[]=array(
 								formatDateTime($ph->dt_created),
 								$w->Auth->getUser($ph->creator_id)->getFullName(),
-								Html::a(WEBROOT."/wiki/viewhistoryversion/".$wiki->name."/".$wh['name']."/".$ph->id,"View",true),
+								Html::a(WEBROOT."/wiki/viewhistoryversion/".$wiki->name."/".$wh['name']."/".$ph->id,__("View"),true),
 							);
 						}
 						echo Html::table($table,"history","tablesorter",true);
 				} else {
-						echo "No changes yet.";
+						echo __("No changes yet.");
 				}
 				?>
 			</div>
@@ -313,14 +313,14 @@
 			
 			<?php if ($wiki->isOwner($w->Auth->user()) && $page->name == "HomePage"):?>
 				<div id="members">
-					<?php echo Html::ab(WEBROOT."/wiki/editmember/".$wiki->id, "Add Member", true); ?>
+					<?php echo Html::ab(WEBROOT."/wiki/editmember/".$wiki->id, __("Add Member"), true); ?>
 					<?php if (!empty($wiki_users)): ?>
 						<table class="tablesorter">
 							<thead>
 								<tr>
-									<th>Name</th>
-									<th>Role</th>
-									<th>Action</th>
+									<th><?php _e('Name'); ?></th>
+									<th><?php _e('Role'); ?></th>
+									<th><?php _e('Action'); ?></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -330,8 +330,8 @@
 										<td><?php echo $mem->role; ?></td>
 										<td>
 											<?php 
-												echo Html::ab($webroot."/wiki/editmember/".$wiki->id."/".$mem->id, "Edit","editbutton")."&nbsp;&nbsp;&nbsp;";
-												echo Html::ab($webroot."/wiki/delmember/".$wiki->id."/".$mem->id,"Delete","deletebutton"); 
+												echo Html::ab($webroot."/wiki/editmember/".$wiki->id."/".$mem->id, __("Edit"),"editbutton")."&nbsp;&nbsp;&nbsp;";
+												echo Html::ab($webroot."/wiki/delmember/".$wiki->id."/".$mem->id,__("Delete"),"deletebutton"); 
 											?>
 										</td>
 									</tr>

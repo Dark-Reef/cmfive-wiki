@@ -4,7 +4,7 @@ function editmember_GET(Web &$w) {
 		$pm = $w->pathMatch("wid","mid");
 		$wiki = $w->Wiki->getWikiById($pm['wid']);
 		if (!$wiki || !$wiki->isOwner($w->Auth->user()) ) {
-			$w->error("No access to this wiki.");
+			$w->error(__("No access to this wiki."));
 		}
 		$mem = $wiki->getUserById($pm['mid']);
 		if (!$mem) {
@@ -25,7 +25,7 @@ function editmember_POST(&$w) {
 		$pm = $w->pathMatch("wid","mid");
 		$wiki = $w->Wiki->getWikiById($pm['wid']);
 		if (!$wiki || !$wiki->isOwner($w->Auth->user()) ) {
-			$w->error("No access to this wiki.");
+			$w->error(__("No access to this wiki."));
 		}
 		$mem = $wiki->getUserById($pm['mid']);
 		if (!$mem) {
@@ -35,7 +35,7 @@ function editmember_POST(&$w) {
 		$mem->role = $w->request("role");
 		$mem->wiki_id = $wiki->id;
 		$mem->insertOrUpdate();
-		$w->msg("Member updated.","/wiki/view/".$wiki->name."/HomePage#members");
+		$w->msg(__("Member updated."),"/wiki/view/".$wiki->name."/HomePage#members");
 	} catch (WikiException $ex) {
 		$w->error($ex->getMessage(),"/wiki");
 	}

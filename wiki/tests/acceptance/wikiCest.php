@@ -28,8 +28,11 @@ class wikiCest
 	 ***************************************************************************/	 
 	public function testWiki($I) {
 		try {
+			
 			$I->login($I,$this->username,$this->password);
-			// CREATE wikis and check that they are reflected in the wiki list view
+			$I->createUser($I,'fred','password','fred','jones','fred@jones.com');
+			$I->setUserPermissions($I,'fred',['user','wiki_user']);
+		// CREATE wikis and check that they are reflected in the wiki list view
 			$this->createNewWiki($I,'Test RTE',true,'richtext');
 			$I->assertEquals(1,$this->countVisibleWikis($I));
 			$this->createNewWiki($I,'Test Markdown',false,'markdown');
@@ -58,6 +61,7 @@ class wikiCest
 	 * Test both RTE and Markdown editors
 	 ***************************************************************************/	 
 	private function testWikiEditing($I) {
+		
 		// with live editing
 		// RTE
 		$this->updateWiki($I,'Test RTE','My content [[WikiWord]]',true,false,'My content');  // bypass check for full content for link transform
@@ -112,8 +116,6 @@ class wikiCest
 		$I->see('HomePage');
 		
 		// live edit updates from other user
-		$I->createUser($I,'fred','password','fred','jones','fred@jones.com');
-		$I->setUserPermissions($I,'fred',['user','wiki_user']);
 		$this->viewWiki($I,'Test RTE');
 		$this->createWikiMember($I,'fred jones','editor');
 		// fred logs in and makes changes

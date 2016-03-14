@@ -2,8 +2,8 @@
 <input type="hidden" name="wikieeditform" value="9d23d65bae7144">
 
 <div id="view">
-	<input class="button tiny" type='submit' value='Load this version' />&nbsp;&nbsp;<input class="button tiny" type='submit' value='Cancel' onclick="window.history.back()" >
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Preview as at <?php echo formatDateTime($history->dt_created) ?></b>
+	<input class="button tiny" type='submit' value='<?php _e('Load this version'); ?>' />&nbsp;&nbsp;<input class="button tiny" type='submit' value='<?php _e('Cancel'); ?>' onclick="window.history.back()" >
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><?php _e('Preview as at'); ?> <?php echo formatDateTime($history->dt_created) ?></b>
 	<ul class="breadcrumbs">
 		<li <?php echo ($page->name === "HomePage" ? "class='current'" : ""); ?>>
 			<a href="<?php echo htmlentities(WEBROOT."/wiki/view/".$wiki->name."/HomePage"); ?>">Home</a>

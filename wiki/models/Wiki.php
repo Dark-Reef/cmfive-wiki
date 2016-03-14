@@ -87,7 +87,7 @@ class Wiki extends DbObject{
 	*****************************/	
 	function insert($force_validation = false) {
 		if (!$this->title) {
-			throw new WikiException("This wiki needs a title.");
+			throw new WikiException(__("This wiki needs a title."));
 		}
 		$this->name = $this->getName();
 		$this->owner_id = $this->w->Auth->user()->id;
@@ -95,7 +95,7 @@ class Wiki extends DbObject{
 		// check if wiki of the same name exists!
 		$ow = $this->Wiki->getWikiByName($this->getName());
 		if ($ow) {
-			throw new WikiExistsException("Wiki of name ".$this->getName()." already exists.");
+			throw new WikiExistsException(__("Wiki of name ").$this->getName().__(" already exists."));
 		}
 		parent::insert();
 		if ($this->type=="richtext" ) {

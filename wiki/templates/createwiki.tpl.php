@@ -1,10 +1,10 @@
 <?php
 $lines = array(
-    "Create Wiki" => array(
-        array(array("Title","text","title","")),
-        array(array("Public","checkbox","is_public",0)),
-         array(array("Type","select","type",'markdown',[['Rich Text','richtext'],['Markdown','markdown']]))
+    __("Create Wiki") => array(
+        array(array(__("Title"),"text","title","")),
+        array(array(__("Public"),"checkbox","is_public",0)),
+         array(array(__("Type"),"select","type",'markdown',[[__('Rich Text'),'richtext'],[__('Markdown'),'markdown']]))
     )
 );
 
-echo Html::multiColForm($lines,$w->localUrl("/wiki/createwiki"),"POST","Create");
+echo Html::multiColForm($lines,$w->localUrl("/wiki/createwiki"),"POST",__("Create"));

@@ -8,7 +8,7 @@ function pagehistory_GET(Web &$w) {
 		
 		// Check for missing parameter
 		if (empty($pm["wikiname"])) {
-			$w->error("Wiki does not exist.", "/wiki");
+			$w->error(__("Wiki does not exist."), "/wiki");
 		}
 		
 		// Get wiki object and check for existance
@@ -16,7 +16,7 @@ function pagehistory_GET(Web &$w) {
 		    // Register for timelog
 		
 		if (empty($wiki->id)) {
-			$w->error("Wiki does not exist.");
+			$w->error(__("Wiki does not exist."));
 		}
 
 		// If page doesn't exist, make one
@@ -25,7 +25,7 @@ function pagehistory_GET(Web &$w) {
 		}
 		$wp = $wiki->getPage($pm['pagename']);
 		if (!$wp) {
-			$w->error('Page does not exist');
+			$w->error(__('Page does not exist'));
 		}
 		
 		

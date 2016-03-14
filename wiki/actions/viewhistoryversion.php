@@ -61,7 +61,7 @@ function viewhistoryversion_GET(Web &$w) {
 		
 		// Check for missing parameter
 		if (empty($pm["wikiname"])) {
-			$w->error("Wiki does not exist.", "/wiki");
+			$w->error(__("Wiki does not exist."), "/wiki");
 		}
 		
 		// Get wiki object and check for existance
@@ -70,7 +70,7 @@ function viewhistoryversion_GET(Web &$w) {
 		$w->Timelog->registerTrackingObject($wiki);
 		
 		if (empty($wiki->id)) {
-			$w->error("Wiki does not exist.");
+			$w->error(__("Wiki does not exist."));
 		}
 
 		// If page doesn't exist, make one

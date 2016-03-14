@@ -6,14 +6,14 @@ function view_GET(Web &$w) {
 		
 		// Check for missing parameter
 		if (empty($pm["wikiname"])) {
-			$w->error("Wiki does not exist.", "/wiki");
+			$w->error(__("Wiki does not exist."), "/wiki");
 		}
 		
 		// Get wiki object and check for existance
 		$wiki = $w->Wiki->getWikiByName($pm['wikiname']);
 		
 		if (empty($wiki->id)) {
-			$w->error("Wiki does not exist.");
+			$w->error(__("Wiki does not exist."));
 		}
 
 		// If page doesn't exist, make one
@@ -25,7 +25,7 @@ function view_GET(Web &$w) {
 		$w->Timelog->registerTrackingObject($wp);
 		
 		if (!$wp) {
-			$wp = $wiki->addPage($pm['pagename'], "New Page.");
+			$wp = $wiki->addPage($pm['pagename'], __("New Page."));
 		}
 		
 		// Reset wiki breadcrumbs
@@ -62,7 +62,7 @@ function view_GET(Web &$w) {
 		
 		
 		// render form without form tag or buttons (which have been moved into the template) by using the false value for the last parameter
-		$w->ctx("editForm", Html::multiColForm($editForm, "/wiki/edit/{$wiki->name}/{$wp->name}", "POST", "Save", null, null, Html::box("/wiki/markup","Markup Help",true),"_self",false));
+		$w->ctx("editForm", Html::multiColForm($editForm, "/wiki/edit/{$wiki->name}/{$wp->name}", "POST", __("Save"), null, null, Html::box("/wiki/markup",__("Markup Help"),true),"_self",false));
 		
 		
 	} catch (Exception $e) {

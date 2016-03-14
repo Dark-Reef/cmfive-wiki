@@ -1,7 +1,7 @@
 <?php 
 $table = array();
 if (!empty($hist)){
-		$table[] = array("Date", "Page", "User");
+		$table[] = array(__("Date"), __("Page"), __("User"));
 		foreach($hist as $wh) {
 			$table[]=array(
 				formatDateTime($wh["dt_created"]),
@@ -11,6 +11,6 @@ if (!empty($hist)){
 		}
 		echo Html::table($table,"history","tablesorter",true);
 } else {
-		echo "No changes yet.";
+		echo __("No changes yet.");
 }
 ?>

@@ -13,7 +13,7 @@ class WikiService extends DbService {
 		if ($wiki && $wiki->canRead($this->w->Auth->user())) {
 			return $wiki;
 		} else {
-			throw new WikiNoAccessException("You have no access to this wiki.");
+			throw new WikiNoAccessException(__("You have no access to this wiki."));
 		}
 	}
 
@@ -29,7 +29,7 @@ class WikiService extends DbService {
 		if ($wiki->canRead($this->w->Auth->user())) {
 			return $wiki;
 		} else {
-			throw new WikiNoAccessException("You have no access to this wiki.");
+			throw new WikiNoAccessException(__("You have no access to this wiki."));
 		}
 	}
 	/*****************************
@@ -102,8 +102,8 @@ class WikiService extends DbService {
           
         $nav = !empty($nav) ? $nav : array();
         if ($w->Auth->loggedIn()) {
-            $w->menuLink("wiki/index", "Wiki List", $nav);
-            $w->menuLink("wiki/createwiki", "New Wiki", $nav);
+            $w->menuLink("wiki/index", __("Wiki List"), $nav);
+            $w->menuLink("wiki/createwiki", __("New Wiki"), $nav);
         }
         $w->ctx("navigation", $nav);
         return $nav;

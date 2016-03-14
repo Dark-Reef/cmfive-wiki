@@ -8,7 +8,7 @@ Config::set('wiki', array(
     'dependencies' => array(
         'cebe/markdown' => '~1.0.1'
     ),
-    'liveedit' => true
+    'liveedit' => false
 ));
 
 // enable WikiPage in rest module

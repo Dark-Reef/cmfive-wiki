@@ -14,8 +14,8 @@ function createwiki_POST(Web &$w) {
 		$w->error($ex->getMessage(),"/wiki/createwiki");
 	}
 	if ($wiki) {
-		$w->msg("Wiki ".$title." created.","/wiki/view/".$wiki->name."/HomePage");
+		$w->msg(__("Wiki ").$title.__(" created."),"/wiki/view/".$wiki->name."/HomePage");
 	} else {
-		$w->error("Wiki couldn't be created","/wiki/index");
+		$w->error(__("Wiki couldn't be created"),"/wiki/index");
 	}
 }
