@@ -164,6 +164,9 @@
 									 * NOW CREATE EDITOR
 									 *************************************************/
 									).done(function(token) {
+										SimpleMDE.prototype.toggleUnorderedList = function() {
+											alert('toggleOrderedList');
+										};
 										simplemde = new SimpleMDE({
 											element: document.getElementById("body"),
 											spellChecker: false,
@@ -198,6 +201,10 @@
 						<?php else: ?>	
 							<script>
 							$(document).ready(function() {
+								SimpleMDE.prototype.toggleUnorderedList = function() {
+									alert('toggleUnorderedList');
+								};
+								
 								simplemde = new SimpleMDE({
 									element: document.getElementById("body"),
 									spellChecker: false,
@@ -222,9 +229,9 @@
 								$(document).ready(function() {
 									CKEDITOR.plugins.addExternal( 'wikipage', '/modules/wiki/assets/ckeditorplugins/wikipage/','plugin.js','' );
 									CKEDITOR.plugins.addExternal( 'liveedit', '/modules/wiki/assets/ckeditorplugins/liveedit/','plugin.js','' );
-									CKEDITOR.plugins.addExternal( 'maximize', '/modules/wiki/assets/ckeditorplugins/maximize/','plugin.js','' );
+									//CKEDITOR.plugins.addExternal( 'maximize', '/modules/wiki/assets/ckeditorplugins/maximize/','plugin.js','' );
 									CKEDITOR.plugins.addExternal( 'autogrow', '/modules/wiki/assets/ckeditorplugins/autogrow/','plugin.js','' );
-									CKEDITOR.config.extraPlugins = 'wikipage,liveedit,maximize,autogrow';
+									CKEDITOR.config.extraPlugins = 'wikipage,liveedit,autogrow'; //,maximize
 									/*************************************************
 									 * AUTH TOKEN
 									 *************************************************/
@@ -241,6 +248,7 @@
 									).done(function(token) {
 										$('#body').each(function(){
 											CKEDITOR.replace(this,{
+												language: 'en',
 												lastModified: '<?php echo $page->dt_modified ?>',
 												pollUrl: '/rest/index/WikiPage/id___equal/<?php echo $page->id; ?>/dt_modified___greater/',
 												saveUrl: '/rest/save/WikiPage/',
@@ -260,11 +268,11 @@
 							<script>
 								$(document).ready(function() {
 									CKEDITOR.plugins.addExternal( 'wikipage', '/modules/wiki/assets/ckeditorplugins/wikipage/','plugin.js','' );
-									CKEDITOR.plugins.addExternal( 'maximize', '/modules/wiki/assets/ckeditorplugins/autogrow/','plugin.js','' );
+									//CKEDITOR.plugins.addExternal( 'maximize', '/modules/wiki/assets/ckeditorplugins/autogrow/','plugin.js','' );
 									CKEDITOR.plugins.addExternal( 'autogrow', '/modules/wiki/assets/ckeditorplugins/maximize/','plugin.js','' );
-									CKEDITOR.config.extraPlugins = 'wikipage,autogrow,maximize';
+									CKEDITOR.config.extraPlugins = 'wikipage,autogrow'; //,maximize';
 									$('#body').each(function(){
-										CKEDITOR.replace(this);
+										CKEDITOR.replace(this,{language: 'en',});
 										
 									});
 									$('#wikibuttons').show();
